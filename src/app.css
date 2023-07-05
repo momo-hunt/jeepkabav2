@@ -14,6 +14,7 @@
 
   --light: hsl(206, 10%, 98%);
 
+  --white: hsl(206, 100%, 100%);
   --primary: hsl(206, 75%, 50%);
 
   --border: 1px solid hsl(206, 25%, 90%);
@@ -63,7 +64,7 @@ select {
   font-size: inherit;
   height: 2.5rem;
   padding: 0 0.5rem;
-  background-color: var(--light);
+  background-color: var(--white);
   border: var(--border-input);
   border-radius: var(--radius);
 }
@@ -85,7 +86,7 @@ button[type="submit"] {
   height: 2.5rem;
   padding: 0 1rem;
   background-color: var(--primary);
-  color: var(--light);
+  color: var(--white);
   border: var(--border-input);
   border-radius: var(--radius);
   font-size: inherit;

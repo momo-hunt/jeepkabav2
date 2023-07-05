@@ -27,7 +27,7 @@
   }
 
   article {
-    background-color: var(--light);
+    background-color: var(--white);
     position: absolute;
     bottom: 0;
     width: 100%;

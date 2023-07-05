@@ -34,7 +34,7 @@
   }
 
   ul li {
-    background-color: var(--light);
+    background-color: var(--white);
     padding: 0.5rem 1rem;
     border-bottom: var(--border);
   }

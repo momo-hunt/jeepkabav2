@@ -193,7 +193,7 @@
   section {
     gap: 1rem;
     padding: 1rem;
-    background-color: var(--light);
+    background-color: var(--white);
   }
 
   .col.col-4 {
