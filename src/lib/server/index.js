@@ -17,7 +17,7 @@ class DB {
     try {
       const respon = await fetch(url);
       const result = await respon.json();
-      console.log("res->", result);
+      // console.log("res->", result);
       if (result.error) throw error(400, result);
 
       return result;

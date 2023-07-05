@@ -1,44 +1,42 @@
 import { writable } from "svelte/store";
 
-// toggle
+// toast
 const toastStore = () => {
   const { subscribe, set, update } = writable([]);
   let old = [];
-  let processId;
   return {
     subscribe,
-    process: (text) => {
+    process: (cat, text) => {
       const id = crypto.randomUUID();
-      processId = id;
-      old = [...old, { id, type: "process", text }];
+      old = [...old, { id, cat, type: "process", text }];
       set(old);
     },
 
-    error: (text) => {
-      if (processId) old = old.filter((o) => o.id != processId);
+    error: (cat, text) => {
+      old = old.filter((o) => o.cat != cat);
 
       const id = crypto.randomUUID();
+      text = "Gagal " + text + " !";
       old = [...old, { id, type: "danger", text }];
       set(old);
 
       setTimeout(() => {
-        set(() => {
-          old.filter((o) => o.id != id);
-        });
+        old = old.filter((o) => o.id != id);
+        set(old);
       }, 4000);
     },
 
-    success: (text) => {
-      if (processId) old = old.filter((o) => o.id != processId);
+    success: (cat, text) => {
+      old = old.filter((o) => o.cat != cat);
 
       const id = crypto.randomUUID();
+      text = "Berhasil " + text + " !";
       old = [...old, { id, type: "success", text }];
       set(old);
 
       setTimeout(() => {
-        set(() => {
-          old.filter((o) => o.id != id);
-        });
+        old = old.filter((o) => o.id != id);
+        set(old);
       }, 4000);
     },
   };
@@ -79,6 +77,7 @@ const listStore = () => {
   return {
     subscribe,
     get: async (collection, option) => {
+      toast.process(collection, `Memuat ${collection}`);
       set({ ...old, [collection]: { loading: true } });
 
       const opt = option ? "opt=" + JSON.stringify(option) : "";
@@ -95,6 +94,7 @@ const listStore = () => {
       if (result.message && result.message == "fetch failed")
         toast.error("Anda sedang offline!");
 
+      toast.success(collection, `memuat ${collection}`);
       old = { ...old, [collection]: { loading: false, ...result } };
       set(old);
     },

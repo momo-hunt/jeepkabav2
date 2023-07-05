@@ -20,9 +20,9 @@
     list.get("rekap");
   });
 
-  $: console.log("toggle : ", $toggle);
-  $: console.log("list : ", $list);
-  $: console.log("obj : ", $obj);
+  // $: console.log("toggle : ", $toggle);
+  // $: console.log("list : ", $list);
+  // $: console.log("obj : ", $obj);
 </script>
 
 <CoForm action="add" title="Tambah pemakaian baru." on:submit={onSubmit}>

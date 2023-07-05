@@ -13,7 +13,7 @@
   method="post"
   use:enhance={({ submitter }) => {
     submitter.focus();
-    toast.process(`Proses ${title}`);
+    toast.process(`${title}`);
     dispatch("process");
 
     return async ({ result }) => {
@@ -22,7 +22,7 @@
         error: result.type != "success",
         data: result.data,
       });
-      if (result.type == "success") return toast.success(`Berhasil ${title}`);
+      if (result.type == "success") return toast.success(`${title}`);
     };
   }}
 >
