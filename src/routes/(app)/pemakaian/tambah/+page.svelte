@@ -1,24 +1,12 @@
 <script>
   import ElIcon from "$lib/ui/element/el-icon.svelte";
+  import CoHeader from "../../../../lib/ui/component/co-header.svelte";
   import UiFormTambah from "./ui-form-tambah.svelte";
   import UiModalPilihSpj from "./ui-modal-pilih-spj.svelte";
 </script>
 
-<header>
-  <a href="./">
-    <ElIcon name="arrow_back" /> Back
-  </a>
-</header>
-
-<h2>Tambah Pemakaian</h2>
+<CoHeader title="Tambah Pemakaian" />
 
 <UiFormTambah />
 
 <UiModalPilihSpj />
-
-<style>
-  h2 {
-    padding: 1rem 0;
-    margin: 0 1rem;
-  }
-</style>

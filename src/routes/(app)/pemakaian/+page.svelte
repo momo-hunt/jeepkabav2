@@ -1,9 +1,8 @@
 <script>
-  import ElIcon from "$lib/ui/element/el-icon.svelte";
-
   import UiListPemakaian from "./ui-list-pemakaian.svelte";
   import { onMount } from "svelte";
   import { list } from "$lib/stores";
+  import CoHeader from "../../../lib/ui/component/co-header.svelte";
 
   let collection = "pemakaian";
 
@@ -12,13 +11,7 @@
   });
 </script>
 
-<header>
-  <a href="./">
-    <ElIcon name="arrow_back" /> Back
-  </a>
-</header>
-
-<h2>Pemakaian</h2>
+<CoHeader title="Pemakaian" />
 
 <a href="/pemakaian/tambah" role="button">Tambah</a>
 

@@ -97,6 +97,14 @@ const listStore = () => {
       toast.success(collection, `memuat ${collection}`);
       old = { ...old, [collection]: { loading: false, ...result } };
       set(old);
+      return old;
+    },
+
+    add: (collection, data) => {
+      return update((n) => {
+        n[collection].data = [data, ...n[collection].data];
+        return n;
+      });
     },
   };
 };

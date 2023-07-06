@@ -23,7 +23,7 @@ export const longAgo = (p) => {
     }
   });
 
-  return result;
+  return result ?? "beberapa saat lalu";
 };
 
 export const getPartDateTime = (p) => {
