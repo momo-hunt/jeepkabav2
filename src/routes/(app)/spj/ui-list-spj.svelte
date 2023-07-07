@@ -2,7 +2,7 @@
   import CoSpin from "$lib/ui/component/co-spin.svelte";
   import { longAgo, getPartDateTime } from "$lib/util/date-time";
 
-  export let spj;
+  export let spj, editValue;
 </script>
 
 {#if spj?.loading}
@@ -12,7 +12,10 @@
 {#if spj?.data}
   <ul>
     {#each spj?.data as d}
-      <li class="row">
+      <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
+      <li class="row" tabindex="0" on:click={() => (editValue = d)}>
         <div>
           {getPartDateTime(d?.tanggal_berangkat)?.month ?? ""} <br />
           <h2>{getPartDateTime(d?.tanggal_berangkat)?.day ?? ""}</h2>

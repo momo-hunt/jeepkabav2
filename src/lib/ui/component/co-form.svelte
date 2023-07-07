@@ -13,16 +13,19 @@
   method="post"
   use:enhance={({ submitter }) => {
     submitter.focus();
-    toast.process(null, `${title}`);
+    toast.process("form" + action, `${title}`);
     dispatch("process");
 
     return async ({ result }) => {
-      console.log("result form : ", result.type, result.data);
+      console.log("result form : ", action, result.type, result.data);
       dispatch("submit", {
         error: result.type != "success",
         data: result.data,
+        action,
       });
-      if (result.type == "success") return toast.success(null, `${title}`);
+      if (result.type == "success")
+        return toast.success("form" + action, `${title}`);
+      toast.error("form" + action, `${title}`);
     };
   }}
 >

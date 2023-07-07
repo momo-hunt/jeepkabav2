@@ -3,7 +3,7 @@
   import { fly, fade } from "svelte/transition";
   import CoSpin from "./co-spin.svelte";
 
-  $: console.log("toast", $toast);
+  // $: if ($toast.length > 0) console.log("toast", $toast);
 </script>
 
 {#if $toast.length}

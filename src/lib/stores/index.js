@@ -10,6 +10,9 @@ const toastStore = () => {
       const id = crypto.randomUUID();
       old = [...old, { id, cat, type: "process", text }];
       set(old);
+      setTimeout(() => {
+        set([]);
+      }, 10000);
     },
 
     error: (cat, text) => {
@@ -77,7 +80,6 @@ const listStore = () => {
   return {
     subscribe,
     get: async (collection, option) => {
-      toast.process(collection, `Memuat ${collection}`);
       set({ ...old, [collection]: { loading: true } });
 
       const opt = option ? "opt=" + JSON.stringify(option) : "";
@@ -94,7 +96,6 @@ const listStore = () => {
       if (result.message && result.message == "fetch failed")
         toast.error("Anda sedang offline!");
 
-      toast.success(collection, `memuat ${collection}`);
       old = { ...old, [collection]: { loading: false, ...result } };
       set(old);
       return old;
@@ -103,6 +104,23 @@ const listStore = () => {
     add: (collection, data) => {
       return update((n) => {
         n[collection].data = [data, ...n[collection].data];
+        return n;
+      });
+    },
+
+    edit: (collection, id, data) => {
+      return update((n) => {
+        n[collection].data = n[collection].data.map((d) => {
+          if (d.id == id) d = { ...d, ...data };
+          return d;
+        });
+        return n;
+      });
+    },
+
+    delete: (collection, id) => {
+      return update((n) => {
+        n[collection].data = n[collection].data.filter((d) => d.id != id);
         return n;
       });
     },

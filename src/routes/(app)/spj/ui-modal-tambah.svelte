@@ -4,26 +4,32 @@
   import CoForm from "$lib/ui/component/co-form.svelte";
   import { formatInputDate, formatInputTime } from "$lib/util/date-time";
 
-  export let kendaraan = {},
+  export let title,
+    action,
+    kendaraan = {},
     sopir = {},
     karyawan = {},
     collection,
+    spj = {},
     open = false;
 </script>
 
-<CoForm
-  action="add"
-  title="tambah spj baru"
-  on:process={() => (open = false)}
-  on:submit
->
+<CoForm {action} {title} on:process={() => (open = false)} on:submit>
   <input type="hidden" name="collection" value={collection} />
+  {#if spj?.["id"]}
+    <input type="hidden" name="id" value={spj?.["id"]} />
+  {/if}
 
-  <CoModal title="Tambah SPJ" {open}>
+  <CoModal {title} {open}>
     <div class="form">
       <div class="col">
         <label for="no_spj">No SPJ</label>
-        <input type="text" name="no_spj" id="no_spj" />
+        <input
+          type="text"
+          name="no_spj"
+          id="no_spj"
+          value={spj?.["no_spj"] ?? ""}
+        />
       </div>
 
       <div class="col">
@@ -34,7 +40,8 @@
           <select
             name="karyawan_id"
             id="karyawan_id"
-            value="b7085af5-3511-4930-8d45-27f644a6f3a4"
+            value={spj?.["karyawan_id"] ??
+              "b7085af5-3511-4930-8d45-27f644a6f3a4"}
           >
             {#each karyawan?.data as { id, nama }}
               <option value={id}>{nama}</option>
@@ -45,12 +52,22 @@
 
       <div class="col">
         <label for="tujuan">Tujuan</label>
-        <input type="text" name="tujuan" id="tujuan" />
+        <input
+          type="text"
+          name="tujuan"
+          id="tujuan"
+          value={spj?.["tujuan"] ?? ""}
+        />
       </div>
 
       <div class="col">
         <label for="keperluan">Keperluan</label>
-        <input type="text" name="keperluan" id="keperluan" />
+        <input
+          type="text"
+          name="keperluan"
+          id="keperluan"
+          value={spj?.["keperluan"] ?? ""}
+        />
       </div>
 
       <div class="row">
@@ -60,7 +77,7 @@
             type="date"
             name="tanggal_berangkat"
             id="tanggal_berangkat"
-            value={formatInputDate()}
+            value={formatInputDate(spj?.["tanggal_berangkat"])}
           />
         </div>
         <div class="col">
@@ -69,7 +86,7 @@
             type="time"
             name="jam_berangkat"
             id="jam_berangkat"
-            value={formatInputTime()}
+            value={formatInputTime(spj?.["jam_berangkat"])}
           />
         </div>
       </div>
@@ -82,7 +99,7 @@
           <select
             name="sopir_id"
             id="sopir_id"
-            value="b7085af5-3511-4930-8d45-27f644a6f3a4"
+            value={spj?.["sopir_id"] ?? "b7085af5-3511-4930-8d45-27f644a6f3a4"}
           >
             {#each sopir?.data as { id, nama }}
               <option value={id}>{nama}</option>
@@ -99,7 +116,8 @@
           <select
             name="kendaraan_id"
             id="kendaraan_id"
-            value="25485499-264e-4435-b30b-a5709db7be54"
+            value={spj?.["kendaraan_id"] ??
+              "25485499-264e-4435-b30b-a5709db7be54"}
           >
             {#each kendaraan?.data as { id, nama }}
               <option value={id}>{nama}</option>

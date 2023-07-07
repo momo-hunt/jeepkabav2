@@ -10,7 +10,9 @@
         <h2>{title}</h2>
       </header>
 
-      <slot />
+      <main>
+        <slot />
+      </main>
 
       <footer>
         <slot name="footer" />
@@ -23,6 +25,7 @@
   section {
     position: fixed;
     inset: 0;
+    height: 100dvh;
     background-color: rgba(0, 0, 0, 0.2);
   }
 
@@ -35,17 +38,24 @@
     border-radius: 2rem 2rem 0 0;
     display: flex;
     flex-direction: column;
-    padding: 1rem 0;
+  }
+
+  main {
+    overflow-y: auto;
+    flex: 1;
   }
 
   header {
     text-align: center;
+    padding: 1rem 0;
   }
 
   footer {
     display: flex;
     gap: 1rem;
+    padding: 1rem 0;
     margin: 0 1rem;
     justify-content: end;
+    border-top: var(--border);
   }
 </style>
